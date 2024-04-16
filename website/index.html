@@ -106,10 +106,19 @@
         </section>
 
         <!-- Dropdown for selecting iframe content -->
-        <label for="content-select">Select Project:</label>
+        <label for="content-select">Select Visualization:</label>
         <select id="content-select" onchange="changeIframe()">
-            <option value="resources/ruby.html">Ruby</option>
-            <option value="resources/webkit.html">WebKit</option>
+            <option value="resources/clusters/ruby.html">Ruby Clustering</option>
+            <option value="resources/clusters/webkit.html">
+                WebKit Clustering
+            </option>
+
+            <option value="resources/treemaps/cpython-treemap.html">
+                CPython Coverage
+            </option>
+            <option value="resources/treemaps/lua-treemap.html">
+                Lua Coverage
+            </option>
         </select>
 
         <iframe id="content-iframe" src="resources/ruby.html"
