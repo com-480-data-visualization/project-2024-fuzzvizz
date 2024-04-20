@@ -1,4 +1,5 @@
 import git
+import sys
 import pandas as pd
 import math
 import os
@@ -83,4 +84,5 @@ def plot_total_lines(
 
 if __name__ == "__main__":
     # Usage: main("/path/to/git/repo")
-    main("../../lua")
+    main(sys.argv[1])
+
