@@ -4,140 +4,123 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Visualization Website</title>
-    <style>
-        /* Reset CSS */
-        body,
-        h1,
-        h2,
-        p,
-        ul,
-        li {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-
-        header,
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        header h1,
-        footer p {
-            margin: 0;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        section {
-            margin-bottom: 40px;
-        }
-
-        h2 {
-            margin-bottom: 10px;
-        }
-
-        #chart-container {
-            border: 1px solid #ccc;
-            padding: 20px;
-        }
-
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        /* Responsive CSS */
-        @media only screen and (max-width: 600px) {
-            header h1 {
-                font-size: 1.5em;
-            }
-
-            main {
-                padding: 10px;
-            }
-
-            #chart-container {
-                padding: 10px;
-            }
-        }
-
-        #content-select {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            cursor: pointer;
-        }
-
-        /* Style for the dropdown options */
-        #content-select option {
-            padding: 10px;
-        }
-    </style>
-</head>
-
-<body>
-    <header>
-        <h1>Project FuzzVizz</h1>
-    </header>
-
-    <main>
-        <!-- <section id="visualization"> -->
-        <!--     <h2>Data Visualization</h2> -->
-        <!--     <div id="chart-container"></div> -->
-        <!-- </section> -->
-
-        <section id="about">
-            <h2>About</h2>
-            <p>This is a prototype website showcasing visualizations.</p>
-        </section>
-
-        <!-- Dropdown for selecting iframe content -->
-        <label for="content-select">Select Visualization:</label>
-        <select id="content-select" onchange="changeIframe()">
-            <option value="resources/clusters/ruby.html">Ruby Clustering</option>
-            <option value="resources/clusters/webkit.html">
-                WebKit Clustering
-            </option>
-
-            <option value="resources/treemaps/cpython-treemap.html">
-                CPython Coverage
-            </option>
-            <option value="resources/treemaps/lua-treemap.html">
-                Lua Coverage
-            </option>
-        </select>
-
-        <iframe id="content-iframe" src="resources/clusters/ruby.html"
-            style="width: 100%; height: 1000px; border: none"></iframe>
-    </main>
-    <footer>
-        <p>2024 Visualization Website</p>
-    </footer>
-
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="script.js"></script>
+    <title>FuzzVizz</title>
     <script>
-        function changeIframe() {
-            var selectElement = document.getElementById("content-select");
-            var iframeElement = document.getElementById("content-iframe");
+        function changeIframe(type) {
+            var selectElement = document.getElementById("content-select-" + type);
+            var iframeElement = document.getElementById("content-iframe-" + type);
             var selectedValue = selectElement.value;
             iframeElement.src = selectedValue;
         }
     </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>FuzzVizz</h1>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>Motivation</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </section>
+
+        <section id="loc">
+            <h2>Lines of Code</h2>
+
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+            <label for="content-select-loc">Select Project:</label>
+            <select id="content-select-loc" onchange="changeIframe('loc')">
+                <option value="resources/loc/ruby.html">Ruby</option>
+                <option value="resources/loc/webkit.html">
+                    WebKit
+                </option>
+                <option value="resources/loc/lua.html">Lua</option>
+            </select>
+
+            <iframe id="content-iframe-loc" src="resources/loc/ruby.html"
+                style="width: 100%; height: 1000px; border: none"></iframe>
+        </section>
+
+        <section id="clusters">
+            <h2>Clusters</h2>
+
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+            <label for="content-select-cluster">Select Project:</label>
+            <select id="content-select-cluster" onchange="changeIframe('cluster')">
+                <option value="resources/clusters/ruby.html">Ruby</option>
+                <option value="resources/clusters/webkit.html">
+                    WebKit
+                </option>
+            </select>
+
+            <iframe id="content-iframe-cluster" src="resources/clusters/ruby.html"
+                style="width: 100%; height: 1000px; border: none"></iframe>
+        </section>
+
+        <section id="coverage">
+            <h2>Coverage</h2>
+
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+            <label for="content-select-cov">Select Project:</label>
+            <select id="content-select-cov" onchange="changeIframe('cov')">
+                <option value="resources/treemaps/lua-treemap.html">
+                    Lua
+                </option>
+                <option value="resources/treemaps/cpython-treemap.html">
+                    CPython
+                </option>
+                <option value="resources/treemaps/php-treemap.html">
+                    PHP
+                </option>
+            </select>
+
+            <iframe id="content-iframe-cov" src="resources/treemaps/lua-treemap.html"
+                style=" width: 100%; height: 1000px; border: none"></iframe>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 FuzzVizz Team, EPFL</p>
+        </footer>
+
 </body>
 
 </html>
