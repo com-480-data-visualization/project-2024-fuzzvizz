@@ -1,17 +1,3 @@
-# Project of Data Visualization (COM-480)
-
-| Student's name | SCIPER |
-| -------------- | ------ |
-| Chibin Zhang   | 355366 |
-| Zurab Tsinadze | 351491 |
-| Tao Lyu        | 335189 |
-
-## Milestone 2
-
-[Milestone 2 Report](./milestone2/milestone2.pdf)
-
-[Website Prototype](https://com-480-data-visualization.github.io/project-2024-fuzzvizz/)
-
 ## Milestone 1
 
 ### Problematic
@@ -125,12 +111,3 @@ to cluster bug reports automatically to analyze their root causes. We took inspi
 [1] [VisFuzz](http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/visfuzzASE19r.pdf)
 
 [2] [Combing For Insight in 10,000 Hacker News Posts With Text Clustering](https://txt.cohere.com/combing-for-insight-in-10-000-hacker-news-posts-with-text-clustering/)
-
-## Milestone 3 (31st May, 5pm)
-
-**80% of the final grade**
-
-## Late policy
-
-- < 24h: 80% of the grade for the milestone
-- < 48h: 70% of the grade for the milestone
