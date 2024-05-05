@@ -5,122 +5,198 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FuzzVizz</title>
+    <link rel="stylesheet" href="style.css" />
     <script>
-        function changeIframe(type) {
-            var selectElement = document.getElementById("content-select-" + type);
+        function changeIframe(type, projectName) {
             var iframeElement = document.getElementById("content-iframe-" + type);
-            var selectedValue = selectElement.value;
-            iframeElement.src = selectedValue;
+            iframeElement.src = "resources/" + type + "/" + projectName + ".html";
+
+            // Remove active class from all project cards
+            var projectCards = document.querySelectorAll(".project-card-" + type);
+            projectCards.forEach(function (card) {
+                card.classList.remove("active");
+            });
+
+            // Add active class to the clicked project card
+            var clickedCard = document.getElementById(
+                "card-" + type + "-" + projectName
+            );
+            clickedCard.classList.add("active");
         }
     </script>
-
-    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://d3js.org/queue.v1.min.js"></script>
+    <style src="style.css"></style>
 </head>
 
 <body>
     <header>
-        <h1>FuzzVizz</h1>
+        <div class="header-content">
+            <h1>FuzzVizz</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">Motivation</a></li>
+                    <li><a href="#clusters">Clusters</a></li>
+                    <li><a href="#coverage">Coverage</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
         <section id="about">
-            <h2>Motivation</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <div class="section-content">
+                <h2>One small step for man, one giant leap for mankind</h2>
+                <div style="display: flex; align-items: center">
+                    <img src="resources/images/hamilton.jpeg" height="550" alt="Margaret Hamilton" />
+                    <div style="margin-left: 20px; flex: 1">
+                        <p>
+                            While the Apollo 11 mission is celebrated for the historic
+                            achievement of landing the first humans on the Moon, the success
+                            of this mission was also greatly enabled by the tireless efforts
+                            of a pioneering computer scientist - Margaret Hamilton. As the
+                            lead software engineer responsible for developing the onboard
+                            flight software for NASA's Apollo missions, including Apollo 11.
+                        </p>
+                        <p>
+                            On the left, you can see Margaret Hamilton next to the printout
+                            of the source code of the Apollo flight software, together with
+                            its documentation. If we are generous to Ms. Hamilton, the stack
+                            of papers is about 2 meters high.
+                        </p>
+                        <p>
+                            Nowadays, all of us browse the web, and the lines of code for
+                            Chromium and your favorite operating system amount to about 100
+                            million lines of code. If we imagine printing this code, we
+                            would get a stack of 370 meters (assuming 27 lines per page and
+                            a thickness of 0.1mm per page).
+                        </p>
+                        <p>
+                            While 2 meters of complexity landed humanity on the Moon in
+                            1969, today we need 370 meters of complexity to surf the web.
+                        </p>
+                        <p style="font-style: italic">
+                            The growth in software complexity is a testament to the
+                            incredible advancements in technology, but it also highlights
+                            the challenges faced by developers and security researchers in
+                            navigating and understanding these vast codebases.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section-content" id="buildings">
+                    <svg id="buildingsBar" width="1100" height="550"></svg>
+                    <script src="buildings.js"></script>
+                </div>
+                <p>
+                    As software systems evolve, their codebase expands exponentially,
+                    making it increasingly difficult to maintain a comprehensive
+                    understanding of their inner workings. Below visualization offers a
+                    unique perspective, tracking the growth of different projects over
+                    time. By leveraging Git history, we can visualize the steady
+                    accumulation of code, highlighting the sheer scale of modern
+                    software development and the pressing need for effective testing
+                    strategies.
+                </p>
+                <div class="project-nav">
+                    <div class="project-card-loc active" id="card-loc-ruby" onclick="changeIframe('loc', 'ruby')">
+                        <h3>Ruby</h3>
+                    </div>
+                    <div class="project-card-loc" id="card-loc-WebKit" onclick="changeIframe('loc', 'WebKit')">
+                        <h3>WebKit</h3>
+                    </div>
+                    <div class="project-card-loc" id="card-loc-lua" onclick="changeIframe('loc', 'lua')">
+                        <h3>Lua</h3>
+                    </div>
+                </div>
+                <iframe id="content-iframe-loc" src="resources/loc/ruby.html"></iframe>
+            </div>
         </section>
-
-        <section id="loc">
-            <h2>Lines of Code</h2>
-
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-
-            <label for="content-select-loc">Select Project:</label>
-            <select id="content-select-loc" onchange="changeIframe('loc')">
-                <option value="resources/loc/ruby.html">Ruby</option>
-                <option value="resources/loc/WebKit.html">
-                    WebKit
-                </option>
-                <option value="resources/loc/lua.html">Lua</option>
-            </select>
-
-            <iframe id="content-iframe-loc" src="resources/loc/ruby.html"
-                style="width: 100%; height: 1000px; border: none"></iframe>
-        </section>
-
         <section id="clusters">
-            <h2>Clusters</h2>
-
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-
-            <label for="content-select-cluster">Select Project:</label>
-            <select id="content-select-cluster" onchange="changeIframe('cluster')">
-                <option value="resources/clusters/ruby.html">Ruby</option>
-                <option value="resources/clusters/webkit.html">
-                    WebKit
-                </option>
-            </select>
-
-            <iframe id="content-iframe-cluster" src="resources/clusters/ruby.html"
-                style="width: 100%; height: 1000px; border: none"></iframe>
+            <div class="section-content">
+                <h2>Untangling the Web of Bug Reports</h2>
+                <p>
+                    Fuzz testing often generates an overwhelming number of bug reports,
+                    many of which may be duplicates or share common root causes.
+                    Clusters visualization tackles this challenge head-on, leveraging
+                    semantic clustering techniques to group related bug reports and
+                    uncover patterns that would otherwise remain obscured. By
+                    visualizing these clusters, developers can gain valuable insights
+                    into the characteristics and underlying issues within their
+                    codebase, streamlining the debugging process and reducing the burden
+                    of manual analysis.
+                </p>
+                <div class="project-nav">
+                    <div class="project-card-clusters active" id="card-clusters-ruby"
+                        onclick="changeIframe('clusters', 'ruby')">
+                        <h3>Ruby</h3>
+                    </div>
+                    <div class="project-card-clusters" id="card-clusters-webkit"
+                        onclick="changeIframe('clusters', 'webkit')">
+                        <h3>WebKit</h3>
+                    </div>
+                </div>
+                <iframe id="content-iframe-clusters" src="resources/clusters/ruby.html"></iframe>
+            </div>
         </section>
 
         <section id="coverage">
-            <h2>Coverage</h2>
-
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-
-            <label for="content-select-cov">Select Project:</label>
-            <select id="content-select-cov" onchange="changeIframe('cov')">
-                <option value="resources/treemaps/lua-treemap.html">
-                    Lua
-                </option>
-                <option value="resources/treemaps/cpython-treemap.html">
-                    CPython
-                </option>
-                <option value="resources/treemaps/php-treemap.html">
-                    PHP
-                </option>
-            </select>
-
-            <iframe id="content-iframe-cov" src="resources/treemaps/lua-treemap.html"
-                style=" width: 100%; height: 1000px; border: none"></iframe>
+            <div class="section-content">
+                <h2>Navigating the Labyrinth of Code Coverage</h2>
+                <p>
+                    At the heart of fuzz testing lies the pursuit of comprehensive code
+                    coverage – the holy grail of uncovering hidden vulnerabilities. Our
+                    coverage visualization offers a unique perspective, combining a
+                    hierarchical treemap layout with interactive exploration. Users can
+                    dive deep into the codebase, inspecting coverage at the module, file
+                    and function level, empowering them to identify the elusive blind
+                    spots that fuzzers struggle to reach. By shedding light on the
+                    coverage landscape, FuzzVizz equips developers and security
+                    researchers with the insights they need to refine their testing
+                    strategies and maximize the impact of their fuzzing campaigns.
+                </p>
+                <div class="project-nav">
+                    <div class="project-card-treemaps active" id="card-treemaps-lua"
+                        onclick="changeIframe('treemaps', 'lua')">
+                        <h3>Lua</h3>
+                    </div>
+                    <div class="project-card-treemaps" id="card-treemaps-luajit"
+                        onclick="changeIframe('treemaps', 'luajit')">
+                        <h3>LuaJIT</h3>
+                    </div>
+                    <div class="project-card-treemaps" id="card-treemaps-luau"
+                        onclick="changeIframe('treemaps', 'luau')">
+                        <h3>Luau</h3>
+                    </div>
+                    <div class="project-card-treemaps" id="card-treemaps-cpython"
+                        onclick="changeIframe('treemaps', 'cpython')">
+                        <h3>CPython</h3>
+                    </div>
+                    <div class="project-card-treemaps" id="card-treemaps-php" onclick="changeIframe('treemaps', 'php')">
+                        <h3>PHP</h3>
+                    </div>
+                    <div class="project-card-treemaps" id="card-treemaps-micropython"
+                        onclick="changeIframe('treemaps', 'micropython')">
+                        <h3>MicroPython</h3>
+                    </div>
+                    <div class="project-card-treemaps" id="card-treemaps-ruby"
+                        onclick="changeIframe('treemaps', 'ruby')">
+                        <h3>Ruby</h3>
+                    </div>
+                    <div class="project-card-treemaps" id="card-treemaps-mruby"
+                        onclick="changeIframe('treemaps', 'mruby')">
+                        <h3>Mruby</h3>
+                    </div>
+                </div>
+                <iframe id="content-iframe-treemaps" src="resources/treemaps/lua.html"></iframe>
+            </div>
         </section>
+    </main>
 
-        <footer>
-            <p>&copy; 2024 FuzzVizz Team, EPFL</p>
-        </footer>
-
+    <footer>
+        <p>&copy; 2024 FuzzVizz Team, EPFL</p>
+    </footer>
 </body>
 
 </html>
