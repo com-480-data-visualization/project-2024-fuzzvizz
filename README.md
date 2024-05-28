@@ -10,7 +10,7 @@
 
 [Visualization website](https://com-480-data-visualization.github.io/project-2024-fuzzvizz/)
 
-[Data TODO](./xxx)
+[Data](https://drive.google.com/file/d/1lZv5DLpj0dXu87sElGJx6JzsFVdsAFLA/view?usp=sharing)
 
 [Screencast](./milestone3/fuzzvizz-screencast.mp4)
 
